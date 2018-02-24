@@ -1,0 +1,73 @@
+.carouselbox {
+  font-family: helvetica,sans-serif;
+  font-size: 14px;
+  position: relative;
+  margin: 1em;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.content {
+  margin: 0;
+  padding: 0;
+}
+.content li {
+  margin: 0 !important;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+  text-align: center;
+}
+
+.active {
+  height: 400px;
+}
+
+.active li {
+  position: absolute;
+  top: 400px;
+}
+.active li.current {
+  top: 0px;
+}
+
+#play_button {
+  font-size: 2rem;
+}
+
+.card-image {
+  height: 320px;
+}
+
+.chapterName {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.story_footer {
+  background-color: #1762a1 !important;
+  color: #fff;
+  height: 70px;
+}
+
+.move_icon {
+  font-size: 7rem !important;
+}
+
+.make_story_height {
+  height: 400px;
+}
+
+.flex-container-vertical {
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  align-items: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.image_resize {
+  max-height: 100%;
+}

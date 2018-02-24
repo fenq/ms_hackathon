@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block customCSS %}
+{% endblock %}
+
+{% block content %}
+
+<div class="columns is-fullheight">
+	<div class="column is-8 is-offset-2 flex-container">
+
+		<div class="page-content">
+
+			<form action="{{ url_for('select_story') }}" name="event name">
+
+				<div class="field is-grouped is-grouped-centered">
+
+					<p class="control">
+						<button class="button is-large is-info" id="play_button">
+							Let's Play!
+						</button>
+					</p>
+
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

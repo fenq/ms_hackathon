@@ -14,10 +14,31 @@ from time import localtime
 from flask_login import current_user
 from sqlalchemy import and_
 
+from random import randint
+
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    return render_template('home.html',
+            t=randint(1,9999), title="Home")
+    # return render_template('index.html', title='Home')
+
+@app.route('/select_story')
+def select_story():
+    return render_template('select_story.html',
+            t=randint(1,9999), title="Select Story")
+
+
+@app.route('/emote')
+def emote():
+    return render_template('emote.html',
+            t=randint(1,9999), title="Select Story")
+
+@app.route('/home')
+def home():
+    return render_template('home.html',
+            t=randint(1,9999), title="Home")
+    # return render_template('index.html', title='Home')
 
 @app.route('/analytics')
 def analytics():

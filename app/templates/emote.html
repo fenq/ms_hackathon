@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block customCSS %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom_emote.css') }}?t={{t}}">
+{% endblock %}
+
+{% block content %}
+
+<div class="columns is-fullheight">
+	<div class="column is-3 flex-container">
+    <div class="card">
+      <div class="card-image camera">
+        <video id="video">Video stream not available.</video>
+      </div>
+
+      <footer class="card-footer story_footer">
+        <p class="card-footer-item">
+          <button id="startbutton" class="button">Take photo (one face please)</button>
+        </p>
+      </footer>
+    </div>
+	</div>
+
+
+	<div class="column is-3 flex-container">
+    <div class="card">
+
+      <header class="card-header has-text-centered">
+        <p class="card-header-title">
+        Try to show
+        </p>
+      </header>
+
+      <div class="card-image">
+        <img class="image_resize" src="{{ url_for('static', filename='images/joy.png') }}?t={{t}}" alt="Placeholder image">
+      </div>
+
+      <canvas id="canvas" style="display: none;"></canvas>
+      <form class="form-inline" method="post" style="display: none;">
+          <input id="photo1" type = "text" name = "file" />
+      </form>
+    
+    </div>
+	</div>
+
+  <div class="column is-3 flex-container">
+    <div class="card">
+
+      <header class="card-header has-text-centered">
+        <p class="card-header-title">
+        Your picture
+        </p>
+      </header>
+
+      <div class="card-image">
+        <img class="image_resize" id="sourceImage">
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-3 flex-container">
+    <div class="card">
+
+      <header class="card-header has-text-centered">
+        <p class="card-header-title">
+        You emoted
+        </p>
+      </header>
+
+      <div class="card-image">
+        <img class="image_resize" id="emotionResult">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block customJS %}
+<script src="{{ url_for('static', filename='js/capture.js') }}?t={{t}}"/>
+<script>
+</script>
+{% endblock %}
