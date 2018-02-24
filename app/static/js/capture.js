@@ -181,6 +181,13 @@
         .done(function(data) {
             // Show formatted JSON on webpage.
             var emotions = data[0].faceAttributes.emotion;
+            
+            var disgust = emotion.disgust;
+            var fear = emotion.fear;
+            var joy = emotion.happiness;
+            var anger = emotion.anger;
+            var sadness = emotion.sadness;
+
             $("#responseTextArea").val(JSON.stringify(emotions));
         })
 
