@@ -23,6 +23,14 @@ def index():
 def analytics():
     return render_template('analytics.html', title='Analytics')
 
+@app.route('/face')
+def face():
+    return render_template('face.html', title='Face')
+
+@app.route('/face2')
+def face2():
+    return render_template('face2.html', title='Face2')
+
 @app.route('/map')
 def map():
     return render_template('map.html', title='Map')

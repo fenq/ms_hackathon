@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+    <!-- Prepare a Dom with size (width and height) for ECharts -->
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts import -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script src="/static/js/macarons.js"></script>
+    <script type="text/javascript">
+        // configure for module loader
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        
+        // use
+        require(
+            [
+                'echarts',
+                'echarts/chart/bar', // require the specific chart type
+                'echarts/chart/line' 
+            ],
+            function (ec) {
+                // Initialize after dom ready
+                var myChart = ec.init(document.getElementById('main'), 'macarons'); 
+                
+                var option = {
+                    title : {
+                        text: 'Performance',
+                        subtext: ''
+                    },
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['Answer correctly','Answer incorrectly']
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            boundaryGap : false,
+                            data : ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            axisLabel : {
+                                formatter: '{value}'
+                            }
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'Answer correctly',
+                            type:'line',
+                            data:[10, 7, 12, 15, 14, 13, 10],
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: 'max'},
+                                    {type : 'min', name: 'min'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name: 'average'}
+                                ]
+                            }
+                        },
+                        {
+                            name:'Answer incorrectly',
+                            type:'line',
+                            data:[5, 8, 3, 0, 1, 2, 5],
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: 'max'},
+                                    {type : 'min', name: 'min'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name : 'average'}
+                                ]
+                            }
+                        }
+                    ]
+                };
+                            
+                // Load data into the ECharts instance 
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+</body>
