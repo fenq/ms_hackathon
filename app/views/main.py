@@ -19,6 +19,13 @@ from sqlalchemy import and_
 def index():
     return render_template('index.html', title='Home')
 
+@app.route('/face')
+def face():
+    return render_template('face.html', title='Face')
+
+@app.route('/face2')
+def face2():
+    return render_template('face2.html', title='Face2')
 
 @app.route('/map')
 def map():
