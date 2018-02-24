@@ -7,6 +7,29 @@
 <body>
 
 <script type="text/javascript">
+    var makeblob = function (dataURL) {
+            dataURL = dataURL.src;
+            var BASE64_MARKER = ';base64,';
+            if (dataURL.indexOf(BASE64_MARKER) == -1) {
+                var parts = dataURL.split(',');
+                var contentType = parts[0].split(':')[1];
+                var raw = decodeURIComponent(parts[1]);
+                return new Blob([raw], { type: contentType });
+            }
+            var parts = dataURL.split(BASE64_MARKER);
+            var contentType = parts[0].split(':')[1];
+            var raw = window.atob(parts[1]);
+            var rawLength = raw.length;
+
+            var uInt8Array = new Uint8Array(rawLength);
+
+            for (var i = 0; i < rawLength; ++i) {
+                uInt8Array[i] = raw.charCodeAt(i);
+            }
+
+            return new Blob([uInt8Array], { type: contentType });
+        }
+
     function processImage() {
         // **********************************************
         // *** Update or verify the following values. ***
@@ -33,23 +56,37 @@
         };
 
         // Display the image.
-        var sourceImageUrl = document.getElementById("inputImage").value;
+        // var sourceImageUrl = document.getElementById("inputImage").value;
         document.querySelector("#sourceImage").src = sourceImageUrl;
 
         // Perform the REST API call.
+        // $.ajax({
+        //     url: uriBase + "?" + $.param(params),
+
+        //     // Request headers.
+        //     beforeSend: function(xhrObj){
+        //         xhrObj.setRequestHeader("Content-Type","application/json");
+        //         xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+        //     },
+
+        //     type: "POST",
+
+        //     // Request body.
+        //     data: '{"url": ' + '"' + sourceImageUrl + '"}',
+        // })
         $.ajax({
             url: uriBase + "?" + $.param(params),
 
             // Request headers.
             beforeSend: function(xhrObj){
-                xhrObj.setRequestHeader("Content-Type","application/json");
+                xhrObj.setRequestHeader("Content-Type","application/octet-stream");
                 xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
             },
 
             type: "POST",
-
+            processData: false,
             // Request body.
-            data: '{"url": ' + '"' + sourceImageUrl + '"}',
+            data: makeblob(sourceImage),
         })
 
         .done(function(data) {
@@ -70,7 +107,7 @@
 <h1>Can you show us how super man looks like?</h1>
 <!-- Enter the URL to an image that includes a face or faces, then click the <strong>Analyze face</strong> button. -->
 <br><br>
-Image to analyze: <input type="text" name="inputImage" id="inputImage" value="https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg" />
+Image to analyze: <input type="text" name="inputImage" id="inputImage" value="" />
 <button onclick="processImage()">Analyze face</button>
 <br><br>
 <div id="wrapper" style="width:1020px; display:table;">

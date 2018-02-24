@@ -22,22 +22,22 @@
       </div>
       <canvas id="canvas">
       </canvas>
-      <div class="output">
+<!--       <div class="output">
         <img id="photo" alt="The screen capture will appear in this box.">
-      </div>
+      </div> -->
 
         <form class="form-inline" method="post">
-          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Category</label>
-          <select class="custom-select my-1 mr-sm-2 field" id="inlineFormCustomSelectPref" name="cate" placeholder={{cate}}>
+          <!-- <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Category</label> -->
+          <!-- <select class="custom-select my-1 mr-sm-2 field" id="inlineFormCustomSelectPref" name="cate" placeholder={{cate}}>
             <option selected>Choose...</option>
             <option value="Green bin">Green bin (food scraps and yard waster)</option>
             <option value="Yellow bag">Yellow bag (paper and compost recyclables)</option>
             <option value="Blue box">Blue box (bottles and cans)</option>
             <option value="Barbage">Barbage bin (Rinsed diapers, Potato chip bags, Ziplock bags, Bubble wrap, Candy wrappers)</option>
-          </select>
+          </select> -->
           <!-- Button trigger modal -->
           <input type="hidden" id="photo1" type = "text" name = "file" />
-          <button type="submit" class="btn btn-primary" >Submit</button>
+          <!-- <button type="submit" class="btn btn-primary" >Submit</button> -->
 
             <!-- Modal -->
             <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -61,5 +61,18 @@
             </div> -->
         </form>
     </div>
+
+    <div id="wrapper" style="width:1020px; display:table;">
+    <div id="jsonOutput" style="width:600px; display:table-cell;">
+        Response:
+        <br><br>
+        <textarea id="responseTextArea" class="UIInput" style="width:580px; height:400px;"></textarea>
+    </div>
+    <div id="imageDiv" style="width:420px; display:table-cell;">
+        Source image:
+        <br><br>
+        <img id="sourceImage" width="400" />
+    </div>
+</div>
 
 {% endblock %}
