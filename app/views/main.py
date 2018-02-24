@@ -19,6 +19,9 @@ from sqlalchemy import and_
 def index():
     return render_template('index.html', title='Home')
 
+@app.route('/analytics')
+def analytics():
+    return render_template('analytics.html', title='Analytics')
 
 @app.route('/map')
 def map():
