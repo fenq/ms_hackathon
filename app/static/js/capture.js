@@ -182,13 +182,46 @@
             // Show formatted JSON on webpage.
             var emotions = data[0].faceAttributes.emotion;
             
-            var disgust = emotion.disgust;
-            var fear = emotion.fear;
-            var joy = emotion.happiness;
-            var anger = emotion.anger;
-            var sadness = emotion.sadness;
+            var disgust = emotions.disgust;
+            var fear = emotions.surprise;
+            var joy = emotions.happiness;
+            var anger = emotions.anger;
+            var sadness = emotions.sadness;
 
-            $("#responseTextArea").val(JSON.stringify(emotions));
+            // alert(JSON.stringify(emotions));
+            var threshold = 0.5;
+
+            var success = false;
+            if (joy > 0.5) {
+              $("#emotionResult").attr("src", '/static/images/joy.png');
+              success = true;
+            }
+
+            if (disgust > 0.5) {
+              $("#emotionResult").attr("src", '/static/images/disgust.png'); 
+              success = true;
+            }
+
+            if (fear > 0.5) {
+              $("#emotionResult").attr("src", '/static/images/fear.png');
+              success = true;
+            }
+
+            if (anger > 0.5) {
+              $("#emotionResult").attr("src", '/static/images/anger.png');    
+              success = true;
+            }
+
+            if (sadness > 0.5) {
+              $("#emotionResult").attr("src", '/static/images/sadness.png');
+              success = true;
+            }
+
+            if (!success) {
+              $("#emotionResult").attr("src", '/static/images/unknown.png');
+            }
+
+            // $("#responseTextArea").val(JSON.stringify(emotions));
         })
 
         .fail(function(jqXHR, textStatus, errorThrown) {
@@ -203,6 +236,9 @@
   function takepicture() {
     var context = canvas.getContext('2d');
     if (width && height) {
+      photo1.setAttribute('value', '');
+      $("#emotionResult").attr("src", '')
+
       canvas.width = width;
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
